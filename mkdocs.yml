@@ -5,7 +5,6 @@ site_url: https://vkbottle.rtfd.io/
 repo_name: vkbottle/vkbottle
 repo_url: https://github.com/vkbottle/vkbottle
 edit_uri: edit/master/docs/
-copyright: <a href="https://github.com/vkbottle/vkbottle/blob/master/LICENSE" target="_blank" rel="noopener">View maintainers</a>
 
 extra:
   generator: false
@@ -32,6 +31,7 @@ nav:
               - State Dispenser: high-level/handling/state-dispenser.md
               - Middleware: high-level/handling/middleware.md
               - Rules: high-level/handling/rules.md
+          - Встроенные правила: high-level/builtin-rules.md
       - Интерфейсы низкого уровня:
           - API:
               - Работа с API: low-level/api.md
@@ -54,6 +54,7 @@ nav:
           - Template: tools/template.md
           - Uploaders: tools/uploaders.md
           - VKScript: tools/vkscript.md
+          - Waiter Machine: tools/waiter-machine.md
       - Кастомизация зависимостей: modules.md
   - Туториал:
       - tutorial/index.md
