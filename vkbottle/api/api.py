@@ -1,29 +1,29 @@
 from collections.abc import Callable, Awaitable
 from typing import (
-    Any,
     AsyncIterator,
     NamedTuple,
+    Sequence,
     Optional,
     Union,
-    Sequence
+    Any
 )
 
 from vkbottle_types import API_URL, API_VERSION
 
+from vkbottle.api.request_rescheduler.blocking import BlockingRequestRescheduler
 from vkbottle.api.token_generator import Token, get_token_generator
-from vkbottle.http import SingleAiohttpClient, ABCHTTPClient
-from vkbottle.exception_factory import CaptchaError
-from vkbottle.modules import logger
-from vkbottle.api.request_validator import (
-    ABCRequestValidator,
-    JSONResponseValidator,
-    VKAPIErrorResponseValidator
-)
-from vkbottle.api.response_validator import (
-    ABCResponseValidator,
-    TranslateFriendlyTypesRequestValidator
-)
 from vkbottle.api.abc import ABCAPI
+
+from vkbottle.api.response_validator import JSONResponseValidator, VKAPIErrorResponseValidator
+from vkbottle.api.request_validator import TranslateFriendlyTypesRequestValidator
+from vkbottle.api.response_validator.abc import ABCResponseValidator
+from vkbottle.api.request_validator.abc import ABCRequestValidator
+
+from vkbottle.http.aiohttp import SingleAiohttpClient
+from vkbottle.http.abc import ABCHTTPClient
+
+from vkbottle.exception_factory.base_exceptions import CaptchaError
+from vkbottle.modules import logger
 
 
 DEFAULT_REQUEST_VALIDATORS = (
@@ -31,7 +31,7 @@ DEFAULT_REQUEST_VALIDATORS = (
 )
 
 DEFAULT_RESPONSE_VALIDATORS = (
-    JSONResponseValidator(),
+    JSONResponseValidator(BlockingRequestRescheduler()),
     VKAPIErrorResponseValidator(),
 )
 
@@ -82,9 +82,7 @@ class API(ABCAPI):
         logger.debug("Request {} with {} data returned {}", method, data, response)
         return await self.validate_response(method, data, response)  # type: ignore
 
-    async def request_many(
-        self, requests: Sequence[APIRequest]  # type: ignore
-    ) -> AsyncIterator[dict]:
+    async def request_many(self, requests: Sequence[APIRequest]) -> AsyncIterator[dict]:
         """Makes many requests opening one session"""
         for request in requests:
             method, data = request.method, await self.validate_request(request.data)  # type: ignore

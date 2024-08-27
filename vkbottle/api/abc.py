@@ -1,34 +1,14 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, Awaitable, Callable, List, Optional
+from typing import Any, Self
 
 from vkbottle_types.categories import APICategories
 
-if TYPE_CHECKING:
-    from vkbottle.exception_factory import CaptchaError
-    from vkbottle.http import ABCHTTPClient
-
-    from .request_rescheduler import ABCRequestRescheduler
-    from .request_validator import ABCRequestValidator
-    from .response_validator import ABCResponseValidator
-    from .token_generator import ABCTokenGenerator
-
 
 class ABCAPI(APICategories, ABC):
-    """Abstract API class
-    Documentation: https://vkbottle.rtfd.io/ru/latest/low-level/api
-    """
-
-    token_generator: "ABCTokenGenerator"
-    ignore_errors: bool
-    http_client: "ABCHTTPClient"
-    request_rescheduler: "ABCRequestRescheduler"
-    response_validators: List["ABCResponseValidator"]
-    request_validators: List["ABCRequestValidator"]
-    captcha_handler: Optional[Callable[["CaptchaError"], Awaitable]] = None
 
     @abstractmethod
     async def request(self, method: str, data: dict) -> dict:
-        """Makes a single request opening a session"""
+        pass
 
     @abstractmethod
     async def validate_response(self, method: str, data: dict, response: Any) -> Any:
@@ -39,5 +19,8 @@ class ABCAPI(APICategories, ABC):
         pass
 
     @property
-    def api_instance(self) -> "ABCAPI":
+    def api_instance(self) -> Self:
         return self
+
+    async def execute(self, code: str) -> Any:
+        return await self.api_instance.request("execute", {"code": code})

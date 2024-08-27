@@ -1,6 +1,6 @@
 from vkbottle.modules import json, pydantic
 
-from .abc import ABCRequestValidator
+from vkbottle.api.request_validator.abc import ABCRequestValidator
 
 
 class TranslateFriendlyTypesRequestValidator(ABCRequestValidator):

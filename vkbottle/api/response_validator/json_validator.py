@@ -5,7 +5,7 @@ from typing import Any, Optional
 from vkbottle.api.request_rescheduler.abc import ABCRequestRescheduler
 from vkbottle.api.response_validator.abc import ABCResponseValidator
 from vkbottle.modules import json, logger
-from vkbottle.api import ABCAPI
+from vkbottle.api.abc import ABCAPI
 
 
 class JSONResponseValidator(ABCResponseValidator):

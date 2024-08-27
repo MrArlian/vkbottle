@@ -5,7 +5,7 @@ from vkbottle.modules import logger
 
 from vkbottle.api.response_validator.abc import ABCResponseValidator
 from vkbottle.modules import logger
-from vkbottle.api import ABCAPI
+from vkbottle.api.abc import ABCAPI
 
 
 class VKAPIErrorResponseValidator(ABCResponseValidator):

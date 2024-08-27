@@ -3,7 +3,7 @@ from typing import Any
 
 from vkbottle.api.request_rescheduler.abc import ABCRequestRescheduler
 from vkbottle.modules import logger
-from vkbottle.api import ABCAPI
+from vkbottle.api.abc import ABCAPI
 
 
 DEFAULT_DELAY = 5

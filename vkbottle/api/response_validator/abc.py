@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from vkbottle.api import ABCAPI
+from vkbottle.api.abc import ABCAPI
 
 
 class ABCResponseValidator(ABC):
