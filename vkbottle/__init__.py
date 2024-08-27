@@ -4,8 +4,6 @@ from vkbottle_types.events import GroupEventType, UserEventType
 from .api import (
     ABCAPI,
     API,
-    DEFAULT_REQUEST_VALIDATORS,
-    DEFAULT_RESPONSE_VALIDATORS,
     ABCRequestRescheduler,
     ABCRequestValidator,
     ABCResponseValidator,

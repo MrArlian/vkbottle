@@ -1,12 +1,11 @@
-from typing import TYPE_CHECKING, Any, NoReturn, Union
+from typing import Any
 
 from vkbottle.exception_factory import CaptchaError, VKAPIError
 from vkbottle.modules import logger
 
-from .abc import ABCResponseValidator
-
-if TYPE_CHECKING:
-    from vkbottle.api import ABCAPI, API
+from vkbottle.api.response_validator.abc import ABCResponseValidator
+from vkbottle.modules import logger
+from vkbottle.api import ABCAPI
 
 
 class VKAPIErrorResponseValidator(ABCResponseValidator):
@@ -16,11 +15,11 @@ class VKAPIErrorResponseValidator(ABCResponseValidator):
 
     async def validate(
         self,
+        ctx_api: ABCAPI,
         method: str,
         data: dict,
-        response: Any,
-        ctx_api: Union["ABCAPI", "API"],
-    ) -> Union[Any, NoReturn]:
+        response: Any
+    ) -> Any:
         if "error" not in response:
             if "response" not in response:
                 request_params = [{"key": key, "value": value} for key, value in data.items()]

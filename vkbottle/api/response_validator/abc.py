@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, NoReturn, Union
+from typing import Any
 
-if TYPE_CHECKING:
-    from vkbottle.api import ABCAPI, API
+from vkbottle.api import ABCAPI
 
 
 class ABCResponseValidator(ABC):
@@ -12,10 +11,6 @@ class ABCResponseValidator(ABC):
 
     @abstractmethod
     async def validate(
-        self,
-        method: str,
-        data: dict,
-        response: Any,
-        ctx_api: Union["ABCAPI", "API"],
-    ) -> Union[Any, NoReturn]:
+        self, ctx_api: ABCAPI, method: str, data: dict, response: Any
+    ) -> Any:
         pass

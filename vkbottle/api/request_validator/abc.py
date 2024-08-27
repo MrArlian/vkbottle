@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import NoReturn, Union
+from typing import Any
 
 
 class ABCRequestValidator(ABC):
@@ -8,5 +8,5 @@ class ABCRequestValidator(ABC):
     """
 
     @abstractmethod
-    async def validate(self, request: dict) -> Union[dict, NoReturn]:
+    async def validate(self, request: dict) -> Any:
         pass
