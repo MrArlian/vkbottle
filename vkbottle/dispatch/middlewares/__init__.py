@@ -1,3 +1,1 @@
-from .abc import BaseMiddleware, MiddlewareError
-
-__all__ = ("BaseMiddleware", "MiddlewareError")
+from .base import BaseMiddleware

@@ -90,7 +90,7 @@ class VideoUploader(BaseUploader):
         if link:
             await self.api.http_client.request_json(server["upload_url"], method="GET")
         else:
-            data = await self.read(file_source)  # type: ignore
+            data = await self.read(file_source)
             file = self.get_bytes_io(data)
             await self.upload_files(server["upload_url"], {"video_file": file}, **params)
 

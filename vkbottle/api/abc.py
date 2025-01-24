@@ -23,4 +23,4 @@ class ABCAPI(APICategories, ABC):
         return self
 
     async def execute(self, code: str) -> Any:
-        return await self.api_instance.request("execute", {"code": code})
+        return await self.request("execute", {"code": code})

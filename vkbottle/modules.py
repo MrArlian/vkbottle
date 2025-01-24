@@ -33,7 +33,7 @@ showwarning_ = warnings.showwarning
 def showwarning(message, category, filename, lineno, file=None, line=None):  # noqa: ARG001
     new_message = f"{category.__name__}: {message}"
     if logging_module == "loguru":
-        logger.opt(depth=2).log("WARNING", new_message)  # type: ignore
+        logger.opt(depth=2).log("WARNING", new_message)
         return
     logger.log(
         logging.WARNING,
@@ -50,9 +50,9 @@ if logging_module == "loguru":
     if not os.environ.get("LOGURU_AUTOINIT"):
         os.environ["LOGURU_AUTOINIT"] = "0"
         os.environ["LOGURU_INFO_COLOR"] = "<bold><green>"
-    from loguru import logger  # type: ignore
+    from loguru import logger
 
-    if not logger._core.handlers:  # type: ignore
+    if not logger._core.handlers:
 
         def log_filter(record):
             if record["function"] == "<module>":
@@ -70,15 +70,15 @@ if logging_module == "loguru":
         class InterceptHandler(logging.Handler):
             def emit(self, record):
                 try:
-                    level = logger.level(record.levelname).name  # type: ignore
+                    level = logger.level(record.levelname).name
                 except ValueError:
                     level = record.levelno
                 frame, depth = sys._getframe(6), 6
                 while frame and frame.f_code.co_filename == logging.__file__:
-                    frame = frame.f_back  # type: ignore
+                    frame = frame.f_back
                     depth += 1
 
-                logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())  # type: ignore
+                logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
         logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
 
@@ -173,11 +173,11 @@ elif logging_module == "logging":
 
     warnings.showwarning = showwarning
 
-    logger = StyleAdapter(logging.getLogger("vkbottle"))  # type: ignore
+    logger = StyleAdapter(logging.getLogger("vkbottle"))
     logger.info("logging is used as the default logger, but we recommend using loguru instead")
 
 if hasattr(asyncio, "WindowsProactorEventLoopPolicy") and isinstance(
-    asyncio.get_event_loop_policy(), asyncio.WindowsProactorEventLoopPolicy  # type: ignore
+    asyncio.get_event_loop_policy(), asyncio.WindowsProactorEventLoopPolicy
 ):
     """
     This is a workaround for a bug in ProactorEventLoop:
@@ -203,7 +203,7 @@ if hasattr(asyncio, "WindowsProactorEventLoopPolicy") and isinstance(
 
         return wrapper
 
-    _ProactorBasePipeTransport.__del__ = silence_exception(_ProactorBasePipeTransport.__del__)  # type: ignore
-    _ProactorBaseWritePipeTransport._loop_writing = silence_exception(  # type: ignore
-        _ProactorBaseWritePipeTransport._loop_writing  # type: ignore
+    _ProactorBasePipeTransport.__del__ = silence_exception(_ProactorBasePipeTransport.__del__)
+    _ProactorBaseWritePipeTransport._loop_writing = silence_exception(
+        _ProactorBaseWritePipeTransport._loop_writing
     )

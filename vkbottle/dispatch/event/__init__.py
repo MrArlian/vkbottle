@@ -1,0 +1,1 @@
+from .vk_event_manager import VkSingleEventManager

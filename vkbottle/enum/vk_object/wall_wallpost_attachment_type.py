@@ -1,0 +1,32 @@
+from enum import StrEnum
+
+
+class WallWallpostAttachmentType(StrEnum):
+    """ Attachment type """
+
+    PHOTO = "photo"
+    PHOTOS_LIST = "photos_list"
+    POSTED_PHOTO = "posted_photo"
+    AUDIO = "audio"
+    AUDIO_PLAYLIST = "audio_playlist"
+    VIDEO = "video"
+    DOC = "doc"
+    LINK = "link"
+    GRAFFITI = "graffiti"
+    NOTE = "note"
+    APP = "app"
+    POLL = "poll"
+    PAGE = "page"
+    ALBUM = "album"
+    MARKET_ALBUM = "market_album"
+    MARKET = "market"
+    EVENT = "event"
+    DONUT_LINK = "donut_link"
+    ARTICLE = "article"
+    TEXTLIVE = "textlive"
+    TEXTPOST = "textpost"
+    TEXTPOST_PUBLISH = "textpost_publish"
+    SITUATIONAL_THEME = "situational_theme"
+    GROUP = "group"
+    STICKER = "sticker"
+    PODCAST = "podcast"
